@@ -1,0 +1,52 @@
+﻿@model IEnumerable<IspitToDo.Models.Tasks>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>TaskList</h1>
+
+<h6>On edit you can edit status and if status is unchecked it will returned to to do task</h6>
+
+
+<p>
+    <a asp-controller="ManageTask" asp-action="Create" asp-route-todolistId="@ViewBag.TodolistId" asp-route-fromTodolistDetails="true" class="btn btn-primary">Create New Task</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+         
+            <th>
+                @Html.DisplayNameFor(model => model.Todolist)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Todolist.Title)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
